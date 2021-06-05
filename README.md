@@ -36,3 +36,5 @@ return {
 	'dat': rq
 }
 ```
+
+![Image alt](https://github.com/aktumar/2020_Project_Instance/blob/master/example/image_of_client_page.png)

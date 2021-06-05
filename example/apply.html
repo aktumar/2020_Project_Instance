@@ -1,0 +1,160 @@
+{% extends 'general.html'%}
+
+{% block title %}
+Подать заявку
+{% endblock %}
+
+{% block display %}
+Подать заявку
+{% endblock %}
+
+{% block lead %}
+Выберите категорию и заполните форму
+{% endblock %}
+
+{% block content %}
+
+<div class="pricing-header px-5 py-5 pt-md-5 pb-md-4 mx-auto justify-content-start">
+    <h4 class="mb-3" align="center">Форма заявки</h4>
+    <hr class="col-md-3 mb-5">
+
+    <form action="/clientpage/login_view" method="post">
+        {% csrf_token %}
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <label for="category">Категория*</label>
+                <select class="custom-select d-block w-100" id="category" name="category" required="">
+                    <option value="">Выберите категорию...</option>
+                    {% for request in requests %}exit
+                    <option>{{ request.category }}</option>
+                    {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                    Пожалуйста, выберите соответствующую категорию
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <label for="first_name">Имя*</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Введите имя"
+                       value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите ваше имя
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-5">
+                <label for="subcategory">Подкатегория*</label>
+                <select class="custom-select d-block w-100" name="subcategory" id="subcategory" required="">
+                    <option value="">Выберите подкатегорию...</option>
+                    <option>Животные и насекомые</option>
+                    <option>Защита потребителей и работников</option>
+                    <option>COVID - 19 помощь</option>
+                    <option>Пожилые люди и инвалиды</option>
+                    <option>Мусор и переработка</option>
+                    <option>Здравохранение</option>
+                    <option>Дома и здания</option>
+                    <option>Окружающая среда (парки, деревья и т.д.)</option>
+                    <option>Общественная безопастность</option>
+                    <option>Государственные услуги</option>
+                </select>
+                <div class="invalid-feedback">
+                    Пожалуйста, выберите соответствующую подкатегорию
+                </div>
+            </div>
+            <div class="col-md-3 mb-5">
+                <label for="last_name">Фамилия*</label>
+                <input name="last_name" type="text" class="form-control" id="last_name" placeholder="Введите фамилию"
+                       value=""
+                       required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите вашу фамилию
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <label for="address">Адрес*<span class="text-muted"> (например: улица Тимирязева 40)</span></label>
+                <input name="address" type="text" class="form-control" id="address" placeholder="Введите адрес"
+                       required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, введите адрес проишествия
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+
+                <label for="phone">Телефон* <span
+                        class="text-muted"> (например: +7 (777) 777-77-77)</span></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Введите ваш номер">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" id="user_phone">Получить код</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <label for="content">Описание*</label>
+                <input type="text" name="content" class="form-control" id="content" placeholder="Опишите проишествие"
+                       required="">
+                <div class="invalid-feedback">
+                    Пожалуйста, кратко опишите проишествие
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <label for="code">Код из смс*</label>
+                <div class="input-group">
+                    <input name="code" type="text" class="form-control" id="code" placeholder="Введите код из смс">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" id="user_code">Подтвердить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="col-md-6 mb-4">
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-2">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="check" id="check">
+                    <label class="custom-control-label" for="check">* Я несу полную ответственность за
+                        подлинность предоставленной информации</label>
+                </div>
+                <div class="custom-control custom-checkbox ">
+                    <input type="checkbox" class="custom-control-input" name="notification" id="notification">
+                    <label class="custom-control-label" for="notification">Я хочу получать смс о статусе
+                        заявки</label>
+                </div>
+            </div>
+        </div>
+
+        <hr class="col-md-6 mb-4">
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-2">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener('click', function(){
+
+    }, false);
+    let userButton = document.querySelector('button#user_phone');
+    userButton.addEventListener('click', function(){
+    let inp = document.querySelector('input#phone');
+    console.log(inp, inp.value);
+    }, false);
+</script>
+
+{% endblock %}
